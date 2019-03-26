@@ -77,7 +77,9 @@ public class UeditorController extends BaseController {
 		sb.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
 		sb.append("</head>");
 		sb.append("<body>");
+		sb.append("<div style='width:90%;margin:20px auto;border:1px solid #ccc;'>");
 		sb.append(webHtml);
+		sb.append("</div>");
 		sb.append("</body>");
 		sb.append("</html>");
 
