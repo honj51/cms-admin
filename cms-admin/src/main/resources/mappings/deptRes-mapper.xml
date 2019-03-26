@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasz.cms.deptRes.mapper.DeptResMapper">
+	
+	<sql id="selectId">
+		id,
+		name,
+		parentId,
+		(select r.name from resources r
+		where r.id = resources.parentId )
+		parentName,
+		resKey,
+		ishide,
+		type,
+		resUrl,
+		level,
+		icon,
+		description
+	</sql>
+	
+	<select id="findDeptRes" parameterType="com.xasz.cms.deptRes.entity.DeptResFormMap" resultType="com.xasz.cms.deptRes.entity.DeptResFormMap">
+		select
+			<include refid="selectId"/>
+		from resources where id in(
+		select resId from
+		dept_res where
+		1=1
+		<if test="deptId != null and deptId != ''">
+			and deptId in (
+			SELECT deptId from dept_res where deptId = #{deptId}
+			)
+		</if>
+		)
+		<if test="parentId != null and parentId != ''">
+			and parentId = #{parentId}
+		</if>
+		order by level asc
+	</select>
+	
+	<update id="deleteDeptRes" parameterType="string">
+		delete from	dept_res where deptId = #{deptId}
+	</update>
+	
+	<insert id="batchSaveDeptRes" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open=""
+			separator=";" close="">
+			insert into dept_res
+				<trim prefix="(" suffix=")" suffixOverrides=",">
+					resId,deptId
+				</trim>
+				<trim prefix="values (" suffix=")" suffixOverrides=",">
+					#{item.resId},#{item.deptId}
+				</trim>
+			
+		</foreach>
+	</insert>
+	
+	<select id="findByDeptId" parameterType="string" resultType="com.xasz.cms.deptRes.entity.DeptResFormMap">
+		select
+			*
+		from
+			dept_res
+		where
+			deptId = #{deptId}
+	</select>
+	
+</mapper>

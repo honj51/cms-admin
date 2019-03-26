@@ -1,0 +1,52 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*公共样式定义,元素初始化*/
+body,ol,ul,li,h1,h2,h3,h4,h5,h6,p,table,th,td,dl,dt,dd,form,fieldset,legend,input,button,textarea,select{ margin:0;padding:0;box-sizing: border-box;}
+input{outline: none;}
+body{background-attachment: fixed; font-family:"微软雅黑","黑体";} 
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%;}
+a,area{ blr:expression(this.onFocus=this.blur()); text-decoration:none; color:#333; }
+*,*:before,*:after {
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+ }
+:focus{ -moz-outline-style:none; }
+.cl{ clear: both; zoom:1;}
+.clear:after {content: "";display: block;height: 0;clear: both;}
+.hide{display:none;}
+
+em,i{font-style:normal;}
+li{list-style:none;}
+img{border:none;vertical-align:middle;}
+a img{ border:none;}
+table{border-collapse:collapse;border-spacing:0;}
+
+
+
+ label{height: 34px;line-height: 34px;}
+         .content{height: 600px;position: relative;padding: 25px;}
+         .line{position: absolute;top: 300px;border: 1px solid#989898;width: 95.5%;margin: auto;z-index: 10;}
+         .left-img{position: absolute;left: 10px;top: 294px;z-index: 1000;}
+         .right-img{position: absolute;right: 10px;top: 294px;z-index: 1000;}
+         .use{position: absolute;top: 273px;left: 12%;z-index: 1000;}
+         .one{width: 230px;height: 180px;border: 1px solid#28B37C;position: absolute;top: 350px;left: 2%;padding: 5px 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align: center;}
+         .receipt{position: absolute;top: 273px;left: 31%;z-index: 1000;}
+         .Clearing{position: absolute;top: 273px;left: 48%;z-index: 1000;}
+         .pay{position: absolute;top: 273px;left: 67%;z-index: 1000;}
+         .finish{position: absolute;top: 273px;left: 84%;z-index: 1000;}
+         
+         .one-bottom{width: 240px;height: 145px;background-color: #28B37C;color: #fff;margin-top: 10px;text-align: left;padding: 10px;}
+         .one-bottom ul li{line-height: 30px;}
+         .two{width: 325px;height: 160px;top: 103px;left: 4%;box-shadow: 0px 0px 30px #ccc;position: absolute;padding: 10px;}
+         .left-span{text-align: left;display: inline-block;width: 60%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+         .right-span{text-align: right;display: inline-block;width: 38%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+         .two-ul{border-bottom: 1px solid#efeff4;padding-bottom: 10px;}
+         .left-span-color{font-size: 16px;color: red;}
+         .two-uls{padding-top: 10px;}
+         .two ul li{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;width: 100%;}
+         .three{width: 350px;height: 260px;top: 6px;left: 37%;box-shadow: 0px 0px 30px #ccc;position: absolute;padding: 10px;}
+        .four{width: 410px;height: 230px;top: 345px;left: 23%;box-shadow: 0px 0px 30px #ccc;position: absolute;padding: 10px;}
+        .five {width: 300px;height: 265px;top: 345px;left: 58%;box-shadow: 0px 0px 30px #ccc;position: absolute;padding: 10px;}
+        .six{width: 300px;height: 186px;top: 79px;left: 73%;box-shadow: 0px 0px 30px #ccc;position: absolute;padding: 10px;}

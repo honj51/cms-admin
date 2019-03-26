@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasz.cms.roleRes.mapper.RoleResMapper">
+	
+	<sql id="selectId">
+		id,
+		name,
+		parentId,
+		(select r.name from resources r
+		where r.id = resources.parentId )
+		parentName,
+		resKey,
+		ishide,
+		type,
+		resUrl,
+		level,
+		icon,
+		description
+	</sql>
+	
+	<select id="findRoleRes" parameterType="com.xasz.cms.deptRes.entity.DeptResFormMap" resultType="com.xasz.cms.deptRes.entity.DeptResFormMap">
+		select
+			<include refid="selectId"/>
+		from resources where id in(
+		select resId from
+		role_res where
+		1=1
+		<if test="roleId != null and roleId != ''">
+			and roleId in (
+			SELECT roleId from role_res where roleId = #{roleId}
+			)
+		</if>
+		)
+		<if test="parentId != null and parentId != ''">
+			and parentId = #{parentId}
+		</if>
+		order by level asc
+	</select>
+	
+	<update id="deleteRoleRes" parameterType="string">
+		delete from	role_res where roleId = #{roleId}
+	</update>
+	
+	<insert id="batchSave" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open=""
+			separator=";" close="">
+			insert into role_res
+				<trim prefix="(" suffix=")" suffixOverrides=",">
+					resId,roleId
+				</trim>
+				<trim prefix="values (" suffix=")" suffixOverrides=",">
+					#{item.resId},#{item.roleId}
+				</trim>
+			
+		</foreach>
+	</insert>
+	
+</mapper>

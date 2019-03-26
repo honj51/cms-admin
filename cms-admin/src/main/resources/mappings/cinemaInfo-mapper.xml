@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasz.cms.cinemaInfo.mapper.CinemaInfoMapper">
+	
+	<select id="findByPage" resultType="com.xasz.cms.cinemaInfo.entity.CinemaInfoFormMap">
+		select
+			*
+		from
+			cinema_info
+		where
+			is_delete = 0
+		<if test="type != null and type != ''">
+		and type = #{type}
+		</if>
+		<if test="date != null and date != ''">
+		and date = #{date}
+		</if>
+		<if test="orderbypart != null and orderbypart != ''">
+		    order by ${orderbypart}
+		</if>
+	</select>
+	
+	<insert id="add" parameterType="com.xasz.cms.cinemaInfo.entity.CinemaInfoFormMap">
+		insert into cinema_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>
+			<if test="type != null">type,</if>
+			<if test="date != null">date,</if>
+			<if test="title != null">title,</if>
+			<if test="description != null">description,</if>
+			<if test="pic_url != null">pic_url,</if>
+			<if test="url != null">url,</if>
+			<if test="remarks != null">remarks,</if>
+			<if test="create_user_id != null">create_user_id,</if>
+			<if test="create_user_name != null">create_user_name,</if>
+			<if test="create_time != null">create_time,</if>
+			<if test="update_user_id != null">update_user_id,</if>
+			<if test="update_user_name != null">update_user_name,</if>
+			<if test="update_time != null">update_time,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id,jdbcType=CHAR},</if>
+			<if test="type != null">#{type,jdbcType=TINYINT},</if>
+			<if test="date != null">#{date,jdbcType=VARCHAR},</if>
+			<if test="title != null">#{title,jdbcType=VARCHAR},</if>
+			<if test="description != null">#{description,jdbcType=VARCHAR},</if>
+			<if test="pic_url != null">#{pic_url,jdbcType=VARCHAR},</if>
+			<if test="url != null">#{url,jdbcType=VARCHAR},</if>
+			<if test="remarks != null">#{remarks},</if>
+			<if test="create_user_id != null">#{create_user_id,jdbcType=CHAR},</if>
+			<if test="create_user_name != null">#{create_user_name,jdbcType=VARCHAR},</if>
+			<if test="create_time != null">#{create_time,jdbcType=CHAR},</if>
+			<if test="update_user_id != null">#{update_user_id,jdbcType=CHAR},</if>
+			<if test="update_user_name != null">#{update_user_name,jdbcType=VARCHAR},</if>
+			<if test="update_time != null">#{update_time,jdbcType=CHAR},</if>
+		</trim>
+	</insert>
+	
+	<update id="updateById" parameterType="com.xasz.cms.cinemaInfo.entity.CinemaInfoFormMap">
+		update
+			cinema_info
+		set
+			<if test="type != null">type = #{type},</if>
+			<if test="date != null">date = #{date},</if>
+			<if test="title != null">title = #{title},</if>
+			<if test="description != null">description = #{description},</if>
+			<if test="pic_url != null">pic_url = #{pic_url},</if>
+			<if test="url != null">url = #{url},</if>
+			<if test="remarks != null">remarks = #{remarks},</if>
+			<if test="is_delete != null and is_delete != ''">is_delete = #{is_delete},</if>
+			update_user_id = #{update_user_id},
+			update_user_name = #{update_user_name},
+			update_time = #{update_time}
+		where 
+			id = #{id} 
+	</update>
+	
+	<select id="findById" parameterType="string" resultType="com.xasz.cms.cinemaInfo.entity.CinemaInfoFormMap">
+		select
+			*
+		from
+			cinema_info
+		where
+			id = #{id}
+	</select>
+	
+	<select id="findAll" parameterType="string" resultType="com.xasz.cms.cinemaInfo.entity.CinemaInfoFormMap">
+		select
+			position,
+			url
+		from
+			website_advertisement
+		where
+			is_delete = 0
+		<if test="position != null and position != ''">
+		and position = #{position}
+		</if>
+	</select>
+	
+</mapper>

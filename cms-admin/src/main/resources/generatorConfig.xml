@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+		location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\6.0.5\mysql-connector-java-6.0.5.jar" />
+	<context id="context1">
+		<jdbcConnection
+			connectionURL="jdbc:mysql://192.168.0.128:3306/cms?serverTimezone=Asia%2fShanghai"
+			driverClass="com.mysql.jdbc.Driver" password="root"
+			userId="root" />
+		<javaModelGenerator targetPackage="com.xasz.cms.dept.entity"
+			targetProject="cms-admin/src/main/java" />
+		<sqlMapGenerator targetPackage="com.xasz.cms.dept.mapper"
+			targetProject="cms-admin/src/main/java" />
+		<javaClientGenerator targetPackage="com.xasz.cms.dept.dao"
+			targetProject="cms-admin/src/main/java" type="XMLMAPPER" />
+		<table schema="cms" tableName="t_dept">
+			<columnOverride column="TYPEID" property="TYPEID" />
+		</table>
+	</context>
+</generatorConfiguration>

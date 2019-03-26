@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasz.cms.mapper.ResourcesMapper">
+	<!--mybatis ehcache缓存配置 -->
+	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 <cache type="org.mybatis.caches.ehcache.LoggingEhcache" 
+		/> -->
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+
+	<sql id="selectId">
+		id,
+		name,
+		parentId,
+		(select r.name from resources r
+		where r.id = resources.parentId )
+		parentName,
+		resKey,
+		ishide,
+		type,
+		resUrl,
+		level,
+		icon,
+		description
+	</sql>
+	
+	<select id="findResourcesPage" resultType="com.xasz.cms.entity.ResFormMap">
+ 		select
+		id,
+   		parentId,
+   		name
+		<include refid="selectId" />
+		from resources
+		order by sort asc
+	</select>
+	
+	<select id="findResByZtreeNodeName" resultType="com.xasz.cms.entity.ResFormMap" parameterType="String">
+		<!-- select
+		<include refid="selectId"/>
+		from t_district	 WHERE is_delete = 0 and id=#{id,jdbcType=CHAR} -->
+		
+		select 
+	      *,(select b.name from resources b where b.id=a.parentId) as parent_name,
+	     (select c.id from resources c where c.id=a.parentId) as parent_id 
+		from resources a
+		 where a.id=#{id,jdbcType=CHAR}
+	</select>
+
+	<select id="findByPage" resultType="com.xasz.cms.entity.ResFormMap">
+		select
+ 		<include refid="selectId" />
+ 		from resources
+ 		where 1 = 1
+		<if test="name != null and name != ''">
+			and name like concat('%','#name','%')  escape '/'
+		</if>
+		<if test="parentId != null and parentId != ''">
+			and parentId = '${parentId}'
+		</if>
+		<if test="orderbypart != null and orderbypart != ''">
+		    ${orderbypart}
+		</if>
+	</select>
+	
+	<select id="findAll" resultType="com.xasz.cms.entity.ResFormMap">
+		select
+ 			id,
+ 			name,
+ 			parentId
+ 		from
+ 			resources
+ 		order by level asc
+	</select>
+	
+	<select id="findByNameAndParentId" resultType="com.xasz.cms.entity.ResFormMap">
+		select
+		<include refid="selectId" />
+		from resources
+		where 1=1
+		<if test="id != null and id != ''">
+			and id = '${id}'
+		</if>
+	</select>
+	<select id="findByParentId" resultType="com.xasz.cms.entity.ResFormMap">
+	    select
+		<include refid="selectId" />
+		from resources
+		where parentId = '0'
+	</select>
+	<select id="findChildlists" resultType="com.xasz.cms.entity.ResFormMap">
+		SELECT
+		<include refid="selectId" />
+		from resources
+		where parentId = #{id}
+	</select>
+	<!-- 获取该用户的权限 -->
+	<select id="findRes" parameterType="String"
+		resultType="com.xasz.cms.entity.ResFormMap">
+		SELECT
+		<include refid="selectId" />
+		from resources where id in(
+		select resId from
+		user_res where
+		1=1
+		<if test="userId != null and userId != ''">
+			and userId = #{userId}
+		</if>
+		<if test="roleId != null and roleId != ''">
+			and userId in (
+			SELECT userId from sys_user_role where roleId = #{roleId}
+			)
+		</if>
+		)
+		<if test="parentId != null and parentId != ''">
+			and parentId = #{parentId}
+		</if>
+		order by level asc
+	</select>
+
+	<!-- 获取该用户的资源-->
+	<select id="findRolesRes" parameterType="String"
+		resultType="com.xasz.cms.entity.ResFormMap">
+		SELECT
+		<include refid="selectId" />
+		from resources where id in(
+		select resId from
+		user_res where
+		1=1
+		<if test="userId != null and userId != ''">
+			and userId = #{userId}
+		</if>
+		<if test="roleId != null and roleId != ''">
+			and userId in (
+			SELECT userId from sys_user_role where roleId = #{roleId}
+			)
+		</if>
+		)
+		<if test="parentId != null and parentId != ''">
+			and parentId = #{parentId}
+		</if>
+		order by level asc
+	</select>
+
+	<!-- 获取所选权限中所有的资源 -->
+	<select id="findSelRolesRes" parameterType="String"
+		resultType="com.xasz.cms.entity.ResFormMap">
+		SELECT
+		<include refid="selectId" />
+		from resources where id in(
+		select DISTINCT(resid) FROM sys_res_role WHERE roleid IN (
+		  SELECT id FROM sys_role WHERE id IN(
+		   <foreach item="item" index="index" collection="roleIds" 
+			    separator="," >
+			   #{item}
+			</foreach>
+		  )))
+		order by level asc
+	</select>
+	
+    <!-- 获取角色的资源 -->
+	<select id="findRoleRes" parameterType="String"
+		resultType="com.xasz.cms.entity.ResRoleFormMap">
+		SELECT
+		<include refid="selectId" />
+		from resources where id in(
+		select resId from
+		sys_res_role where
+		1=1
+		<if test="roleId != null and roleId != ''">
+			and roleId = #{roleId}
+		</if>
+		)
+		<if test="parentId != null and parentId != ''">
+			and parentId = #{parentId}
+		</if>
+		order by level asc
+	</select>
+	
+	<!-- 根据账号Id获取该用户的权限 -->
+	<select id="findUserResourcess" parameterType="String"
+		resultType="com.xasz.cms.entity.ResFormMap">
+		SELECT
+		<include refid="selectId" />
+		from resources where id in(
+		select resId from user_res
+		where userId=#{userId})
+	</select>
+	
+	<update id="updateSortOrder" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			update resources
+			<set>
+				level = #{item.level}
+			</set>
+			where id = #{item.id}
+		</foreach>
+	</update>
+	<!-- 删 -->
+	<delete id="deleteResourcesRole" parameterType="String">
+		delete from
+		sys_res_roles
+		where role_id=#{id}
+	</delete>
+
+	<insert id="addRoleRes">
+		insert into sys_res_roles (role_id,resc_id) value
+		(#{roleId},#{resId})
+	</insert>
+    <!-- 根据角色获取sys_user_role -->
+	<select id="getTSysResRoleByRoleId" parameterType="String" resultType="com.xasz.cms.entity.ResRoleFormMap">
+		select * from sys_res_role where roleId =  #{roleId}
+	</select>
+	<update id="updateSort">
+	update resources set level = #{level} 
+      where id = #{id}
+	</update>
+	
+	<delete id="deleteById">
+		DELETE
+		FROM
+			resources
+		WHERE
+			id = #{id}
+	</delete>
+	
+	<select id="findById" parameterType="string" resultType="com.xasz.cms.entity.ResFormMap">
+		SELECT
+			*
+		from 
+			resources 
+		where 
+			id = #{id}
+	</select>
+	
+	<select id="findUserRes" parameterType="string" resultType="com.xasz.cms.entity.ResFormMap">
+		select
+			*
+		from
+			user_res
+		where
+			userId = #{userId}
+	</select>
+	
+	<update id="deleteUserRes" parameterType="string">
+		delete from	user_res where userId = #{userId}
+	</update>
+	
+	<insert id="batchSaveUserRes" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open=""
+			separator=";" close="">
+			insert into user_res
+				<trim prefix="(" suffix=")" suffixOverrides=",">
+					resId,userId
+				</trim>
+				<trim prefix="values (" suffix=")" suffixOverrides=",">
+					#{item.resId},#{item.userId}
+				</trim>
+			
+		</foreach>
+	</insert>
+	
+</mapper>

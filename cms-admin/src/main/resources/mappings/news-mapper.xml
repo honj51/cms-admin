@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasz.cms.website.news.mapper.NewsMapper">
+	
+	<select id="findByPage" resultType="com.xasz.cms.website.news.entity.NewsFormMap">
+		select
+			*
+		from
+			website_news
+		where
+			is_delete = 0
+		<if test="queryparam != null and queryparam != ''">
+		and title like concat ('%',#{title},'%')
+		</if>
+		<if test="newsTitleId != null and newsTitleId != ''">
+		and news_title_id = #{newsTitleId}
+		</if>
+		<if test="orderbypart != null and orderbypart != ''">
+		    order by ${orderbypart}
+		</if>
+	</select>
+	
+	<insert id="add" parameterType="com.xasz.cms.website.news.entity.NewsFormMap">
+		insert into website_news
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="news_title_id != null">
+				news_title_id,
+			</if>
+			<if test="news_title_name != null">
+				news_title_name,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="detail_url != null">
+				detail_url,
+			</if>
+			<if test="remarks != null">
+				remarks,
+			</if>
+			<if test="create_user_id != null">
+				create_user_id,
+			</if>
+			<if test="create_user_name != null">
+				create_user_name,
+			</if>
+			<if test="create_time != null">
+				create_time,
+			</if>
+			<if test="update_user_id != null">
+				update_user_id,
+			</if>
+			<if test="update_user_name != null">
+				update_user_name,
+			</if>
+			<if test="update_time != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="news_title_id != null">
+				#{news_title_id,jdbcType=VARCHAR},
+			</if>
+			<if test="news_title_name != null">
+				#{news_title_name,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=TINYINT},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=TINYINT},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="detail_url != null">
+				#{detail_url,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				#{remarks},
+			</if>
+			<if test="create_user_id != null">
+				#{create_user_id,jdbcType=CHAR},
+			</if>
+			<if test="create_user_name != null">
+				#{create_user_name,jdbcType=VARCHAR},
+			</if>
+			<if test="create_time != null">
+				#{create_time,jdbcType=CHAR},
+			</if>
+			<if test="update_user_id != null">
+				#{update_user_id,jdbcType=CHAR},
+			</if>
+			<if test="update_user_name != null">
+				#{update_user_name,jdbcType=VARCHAR},
+			</if>
+			<if test="update_time != null">
+				#{update_time,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateById" parameterType="com.xasz.cms.website.news.entity.NewsFormMap">
+		update
+			website_news
+		set
+			<if test="news_title_id != null">
+				news_title_id = #{news_title_id},
+			</if>
+			<if test="news_title_name != null">
+				news_title_name = #{news_title_name},
+			</if>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="url != null">
+				url = #{url},
+			</if>
+			<if test="detail_url != null">
+				detail_url = #{detail_url},
+			</if>
+			<if test="remarks != null">
+				remarks = #{remarks},
+			</if>
+			<if test="is_delete != null and is_delete != ''">
+				is_delete = #{is_delete},
+			</if>
+			update_user_id = #{update_user_id},
+			update_user_name = #{update_user_name},
+			update_time = #{update_time}
+		where 
+			id = #{id} 
+	</update>
+	
+	<select id="findById" parameterType="string" resultType="com.xasz.cms.website.news.entity.NewsFormMap">
+		select
+			*
+		from
+			website_news
+		where
+			id = #{id}
+	</select>
+	
+</mapper>

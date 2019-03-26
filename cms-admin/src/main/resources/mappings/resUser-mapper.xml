@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasz.cms.mapper.ResUserMapper">
+	
+	<delete id="deleteByUserId">
+		DELETE
+		FROM
+			user_res
+		WHERE
+			userId = #{userId}
+		<if test="resId !=null and resId != ''">
+		and 
+			resId = #{resId}
+		</if>	
+	</delete>
+	
+	<insert id="addUserRes">
+		INSERT INTO user_res SELECT
+			role_res.resId,
+			#{userId}
+		FROM
+			role_res
+		INNER JOIN role ON role_res.roleId = role.id
+		WHERE
+			role.id = #{roleId}
+	</insert>
+	
+</mapper>

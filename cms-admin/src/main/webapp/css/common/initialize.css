@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*公共样式定义,元素初始化*/
+body,ol,ul,li,h1,h2,h3,h4,h5,h6,p,table,th,td,dl,dt,dd,form,fieldset,legend,input,button,textarea,select{ margin:0;padding:0;box-sizing: border-box;}
+input{outline: none;}
+body{background-attachment: fixed; font-family:"微软雅黑","黑体";} 
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%;}
+a,area{ blr:expression(this.onFocus=this.blur()); text-decoration:none; color:#333; }
+*,*:before,*:after {
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+ }
+:focus{ -moz-outline-style:none; }
+.cl{ clear: both; zoom:1;}
+.clear:after {content: "";display: block;height: 0;clear: both;}
+.hide{display:none;}
+
+em,i{font-style:normal;}
+li{list-style:none;}
+img{border:none;vertical-align:middle;}
+a img{ border:none;}
+table{border-collapse:collapse;border-spacing:0;}
+
+
+ 

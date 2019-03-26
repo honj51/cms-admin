@@ -1,0 +1,14 @@
+.bootstrap-select>.dropdown-toggle {
+	width: 100%;
+	padding-right: 25px;
+	font-size: 12px;
+}
+
+.bootstrap-select.btn-group .dropdown-menu {
+	min-width: 100%;
+	z-index: 1035;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-size: 12px;
+}

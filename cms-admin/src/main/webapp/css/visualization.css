@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+body {
+	padding:40px;
+}
+ul li {
+    width: 240px;
+    height: 200px;
+    background-color: #E8F2FE;
+    overflow: hidden;
+    box-shadow: 0 4px 5px rgba(0,0,0,.2);
+    float: left;
+    margin: 20px;
+    cursor: pointer;
+}
+
+ul li:hover {
+	box-shadow:0 2px 7px rgba(0,0,0,.4);
+}
+
+ul li h5 {
+    text-align: center;
+    line-height: 40px;
+    margin: 0;
+}
+
+ul li a {
+	color: #000;
+    display: inline-block;
+    height: 100%;
+}
+
+ul li a:hover {
+	color:#666;
+	text-decoration: none;
+}
+
+ul li:hover a {
+	color:#666;
+}

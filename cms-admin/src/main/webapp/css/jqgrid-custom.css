@@ -1,0 +1,72 @@
+.ui-jqgrid-title {
+	font-size: 1.2em;
+	color: #5faee3;
+	margin-top: 5px;
+}
+
+.ui-state-default {
+	background: #fff;
+}
+
+.ui-state-default th {
+	background: #5faee3;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	height: 30px;
+	border: 1px solid #ccc;
+	font-size: 14px;
+}
+
+.ui-jqgrid-bdiv {
+	background: #fff;
+}
+
+.ui-jqgrid-bdiv tr:nth-child(odd) {
+	background: #eee !important;
+}
+
+.ui-pager-table tr:hover {
+	background: none !important;
+}
+
+.ui-jqgrid-view table {
+	border-collapse: collapse;
+}
+
+.ui-jqgrid-view td {
+	border: 1px solid #ccc;
+	font-size: 13px;
+	height: 30px;
+}
+
+.table>thead>tr>th{
+	background: #5faee3;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	height: 30px;
+	border: 1px solid #ccc;
+	font:14px normal "Microsoft YaHei";
+}
+
+
+/* jqgrid最新版样式修改部分 */
+.ui-jqgrid .ui-jqgrid-htable .ui-th-div {
+   font-size: 14px !important;
+   font-weight: 200;
+   margin-top: 0px;
+}
+.ui-jqgrid .ui-jqgrid-htable .ui-th-div:hover{
+   background-color: #5faee3 !important;
+   color: #fff;
+}
+.ui-th-column, .ui-jqgrid .ui-jqgrid-htable th.ui-th-column:hover {
+    background-color: #5faee3 !important;
+    color: #fff;
+}
+.ui-jqgrid .ui-jqgrid-pager .ui-pager-table, .ui-jqgrid .ui-jqgrid-toppager .ui-pager-table {
+    width: 100%;
+    table-layout: fixed;
+    height: 0% ;
+}
