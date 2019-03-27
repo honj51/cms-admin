@@ -2,7 +2,7 @@
 var grid = null;
 $(window).resize(function() {
 	$(window).unbind("onresize");
-	$("#jqGrid").setGridHeight(window.document.body.clientHeight - 260);
+	$("#jqGrid").setGridHeight(window.document.body.clientHeight - 220);
 	$("#jqGrid").setGridWidth(window.document.body.clientWidth - 10);
 	$(window).bind("onresize", this);
 });
@@ -11,7 +11,7 @@ $(function() {
 	$(".selectpicker").selectpicker({size:7});
 	
 	grid = $("#jqGrid").jqGrid({
-		url: rootPath + '/hotel/food/findByPage.shtml',
+		url: rootPath + '/building/ad/findByPage.shtml',
 		mtype: "POST",
 		postData: {
 		},
@@ -44,51 +44,9 @@ $(function() {
 			hidden: true
 		},
 		{
-			label: '标题',
-			name: 'title',
-			index: 'title',
-		},
-		{
-			label: '推荐星级',
-			name: 'star_level',
-			index: 'star_level',
-			formatter: function(value, opt, rec) {
-				if(value == 1){
-					return "一星";
-				}else if(value == 2){
-					return "二星";
-				}else if(value == 3){
-					return "三星";
-				}else if(value == 4){
-					return "四星";
-				}else if(value == 5){
-					return "五星";
-				}else{
-					return "";
-				}
-			}
-		},
-		{
-			label: '所属酒店',
-			name: 'content',
-			index: 'content'
-		},
-		{
-			label: '餐品展示图片',
-			name: 'first_url',
-			index: 'first_url',
-			formatter: function(value, opt, rec) {
-				if(value != null && value != '' && typeof(value) != 'undefined'){
-					return '<img src="'+value+ '"  style="width:50px;height:50px;" onclick=getUrl("'+ value +'") />';
-				}else{
-					return "";
-				}
-			}
-		},
-		{
-			label: '餐品展示图片',
-			name: 'second_url',
-			index: 'second_url',
+			label: '广告图片',
+			name: 'url',
+			index: 'url',
 			formatter: function(value, opt, rec) {
 				if(value != null && value != '' && typeof(value) != 'undefined'){
 					return '<img src="'+value+ '"  style="width:50px;height:50px;" onclick=getUrl("'+ value +'") />';
@@ -135,7 +93,7 @@ $(function() {
 		shrinkToFit: true,
 		sortname: 'update_time',
 		sortorder: "desc",
-		height: (window.document.body.clientHeight - 260),
+		height: (window.document.body.clientHeight - 220),
 		width: (window.document.body.clientWidth - 10),
 		rowNum: 10,
 		pager: "#jqGridPager",
@@ -171,8 +129,7 @@ $(function() {
 function search(){
 	grid.jqGrid('setGridParam', {
 		postData: {
-			queryparam : $("#queryparam").val().trim(),
-			starLevel : $("#starLevel option:selected").val()
+			position : $("#position option:selected").val()
 		},
 		page: 1
 	}).trigger("reloadGrid");
@@ -183,8 +140,7 @@ function refresh(){
 	$('.selectpicker').selectpicker('refresh');
 	grid.jqGrid('setGridParam', {
 		postData: {
-			queryparam : "",
-			starLevel : ""
+			position : "",
 		},
 		page : 1
 	}).trigger("reloadGrid");
@@ -192,10 +148,10 @@ function refresh(){
 
 function add(){
 	parent.layer.open({
-		title: "新增餐品",
+		title: "新增广告",
 		type: 2,
 		area: ["60%", "70%"],
-		content: rootPath + '/hotel/food/addUI.shtml',
+		content: rootPath + '/building/ad/addUI.shtml',
 		end : function(){
 			$("#jqGrid").trigger('reloadGrid');
 	    }
@@ -223,10 +179,10 @@ function edit(){
 	var rowId = rowIds[0];
 	
 	parent.layer.open({
-		title: "修改餐品",
+		title: "修改广告",
 		type: 2,
 		area: ["60%", "70%"],
-		content: rootPath + '/hotel/food/editUI.shtml?id=' + rowId,
+		content: rootPath + '/building/ad/editUI.shtml?id=' + rowId,
 		end : function(){
 			$("#jqGrid").trigger('reloadGrid');
 	    }
@@ -243,11 +199,11 @@ function del() {
 		return;
 	}
 
-	parent.layer.confirm('确定要删除餐品吗？', function(index) {
+	parent.layer.confirm('确定要删除广告吗？', function(index) {
 		top.ajaxLoading();
 		$.ajax({
 			type : "post",
-			url : rootPath + '/hotel/food/delete.shtml',
+			url : rootPath + '/building/ad/delete.shtml',
 			data : {
 				ids : rowIds.toString()
 			},
