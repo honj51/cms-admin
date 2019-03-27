@@ -4,7 +4,7 @@ $(document).ready(function() {
 	var websocket = null;
 	// 判断当前浏览器是否支持WebSocket
 	if ('WebSocket' in window) {
-		websocket = new WebSocket("ws://47.104.242.41:80/cms-admin/websocket/" + accountName);
+		websocket = new WebSocket("ws://localhost:80/cms-admin/websocket/" + accountName);
 	} else {
 		layer.alert('当前浏览器不支持预定信息推送！', function(index){
 			layer.close(index);
