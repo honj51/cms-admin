@@ -68,7 +68,7 @@ $(function() {
 			index: 'url',
 			formatter: function(value, opt, rec) {
 				if(value != null && value != '' && typeof(value) != 'undefined'){
-					return '<img src="'+value+ '"  style="width:50px;height:50px;" />';
+					return '<img src="'+value+ '"  style="width:50px;height:50px;" onclick=getUrl("'+ value +'") />';
 				}else{
 					return "";
 				}
@@ -80,7 +80,7 @@ $(function() {
 			index: 'detail_url',
 			formatter: function(value, opt, rec) {
 				if(value != null && value != '' && typeof(value) != 'undefined'){
-					return '<img src="'+value+ '"  style="width:50px;height:50px;" />';
+					return '<img src="'+value+ '"  style="width:50px;height:50px;" onclick=getUrl("'+ value +'") />';
 				}else{
 					return "";
 				}
@@ -282,4 +282,8 @@ function del() {
 		});
 	});
 
+}
+
+function getUrl(url){
+	top.showImage(url);
 }
