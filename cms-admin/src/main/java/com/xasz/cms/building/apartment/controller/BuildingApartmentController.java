@@ -141,4 +141,5 @@ public class BuildingApartmentController extends BaseController {
 
 		return "success";
 	}
+	
 }
