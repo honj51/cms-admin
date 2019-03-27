@@ -125,7 +125,7 @@ public class ImgUtil {
 				os.write(bs, 0, len);
 			}
 
-			Thumbnails.of("E:/apache-tomcat-7.0.68/webapps/upload/" + fileName).scale(1f).outputQuality(0.25f)
+			Thumbnails.of("E:/apache-tomcat-7.0.68/webapps/upload/" + fileName).scale(1f).outputQuality(0.1f)
 					.toFile("E:/apache-tomcat-7.0.68/webapps/upload/" + fileName);
 
 		} catch (IOException e) {
