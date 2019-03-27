@@ -326,15 +326,11 @@ public class BuildingAdController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "findAllList", method = RequestMethod.POST)
+	@RequestMapping(value = "findAllList", method = RequestMethod.GET)
 	public List<BuildingAdFormMap> findAllList(HttpServletRequest request, HttpServletResponse response) {
 		response.setHeader("Access-Control-Allow-Origin", "*");
 
-		String position = request.getParameter("position");
-
-		BuildingAdFormMap formMap = new BuildingAdFormMap();
-		formMap.put("position", position);
-		List<BuildingAdFormMap> formMaps = buildingAdService.findAll(formMap);
+		List<BuildingAdFormMap> formMaps = buildingAdService.findAll();
 		return formMaps;
 	}
 

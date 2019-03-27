@@ -66,6 +66,7 @@
 			/hotel/** = anon
 			/websocket/** = anon
 			/ueditor/** = anon
+			/building/** = anon
 			</value>
 		</property>
 	</bean>
