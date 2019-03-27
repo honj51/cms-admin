@@ -106,7 +106,7 @@
 			id = #{id}
 	</select>
 	
-	<select id="findAll" parameterType="string" resultType="com.xasz.cms.building.ad.entity.BuildingAdFormMap">
+	<select id="findAll" resultType="com.xasz.cms.building.ad.entity.BuildingAdFormMap">
 		select
 			*
 		from
