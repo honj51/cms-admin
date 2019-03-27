@@ -46,6 +46,14 @@ a, a:visited{
 	text-indent: 0px;
 	font-size: small;
 }
+/*设置关闭按钮*/
+#fancybox-buttons a.btnClose {
+	border-right: 1px solid #3e3e3e;
+	background-image: url(images/close.png);
+	text-indent: 0px;
+	font-size: small;
+	background-position: 10px 5px;
+}
 
 .fancybox-overlay {
 	z-index: 99999998;
