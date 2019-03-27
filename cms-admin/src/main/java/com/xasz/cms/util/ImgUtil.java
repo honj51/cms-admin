@@ -11,8 +11,6 @@ import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
