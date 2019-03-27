@@ -39,8 +39,7 @@ public interface BuildingAdMapper {
 	/**
 	 * 查找所有
 	 * 
-	 * @param formMap
 	 * @return
 	 */
-	public List<BuildingAdFormMap> findAll(BuildingAdFormMap formMap);
+	public List<BuildingAdFormMap> findAll();
 }

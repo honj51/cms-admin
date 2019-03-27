@@ -31,8 +31,8 @@ public class BuildingAdService {
 		return mapper.findById(id);
 	}
 
-	public List<BuildingAdFormMap> findAll(BuildingAdFormMap formMap) {
-		return mapper.findAll(formMap);
+	public List<BuildingAdFormMap> findAll() {
+		return mapper.findAll();
 	}
 
 }
