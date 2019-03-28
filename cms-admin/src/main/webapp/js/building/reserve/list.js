@@ -60,6 +60,11 @@ $(function() {
 			}
 		},
 		{
+			label: '预约户型',
+			name: 'apartment_name',
+			index: 'apartment_name',
+		},
+		{
 			label: '客户名称',
 			name: 'client_name',
 			index: 'client_name',
@@ -86,6 +91,41 @@ $(function() {
 				}else{
 					return "";
 				}
+			}
+		},
+		{
+			label: '处理结果',
+			name: 'manage_result',
+			index: 'manage_result',
+			formatter: function(value, opt, rec) {
+				if(value == 1){
+					return "可看房";
+				}else if(value == 2){
+					return "不可看房";
+				}else{
+					return "";
+				}
+			}
+		},
+		{
+			label: '处理人',
+			name: 'manage_user_name',
+			index: 'manage_user_name',
+		},
+		{
+			label: '处理人电话',
+			name: 'manage_user_phone',
+			index: 'manage_user_phone',
+		},
+		{
+			label: '处理时间',
+			name: 'manage_time',
+			index: 'manage_time',
+			formatter: function(value, opt, rec) {
+				if(value != null && value != '' && typeof(value) != 'undefined'){
+					return new Date(value).format("yyyy-MM-dd hh:mm:ss");
+				}
+				return '';
 			}
 		},
 		{
@@ -132,12 +172,8 @@ $(function() {
 		refresh();
 	});
 	
-	$("#mangeYes").click("click", function() {
-		mange("yes");
-	});
-	
-	$("#mangeNo").click("click", function() {
-		mange("no");
+	$("#manage").click("click", function() {
+		manage();
 	});
 	
 	$("#del").click("click", function() {
@@ -172,7 +208,7 @@ function refresh(){
 	}).trigger("reloadGrid");
 }
 
-function mange(type){
+function manage(){
 	var rowIds = $("#jqGrid").jqGrid('getGridParam', "selarrrow");
 	if (rowIds.length == 0) {
 		parent.layer.msg('请选择数据！', {
@@ -182,45 +218,23 @@ function mange(type){
 		return;
 	}
 	
+	if (rowIds.length > 1) {
+		parent.layer.msg('只能选择一条数据！', {
+			icon: 20,
+			time: 1000
+		});
+		return;
+	}
 
-	top.ajaxLoading();
-	$.ajax({
-		type : "post",
-		url : rootPath + '/building/reserve/manage.shtml',
-		data : {
-			ids : rowIds.toString(),
-			type : type
-		},
-		dataType : "json",
-		success : function(response) {
-			top.ajaxLoadEnd();
-			if (response == "success") {
-				parent.layer.msg('处理成功！', {
-					icon : 1,
-					time : 1000
-				});
-			} else {
-				parent.layer.msg('处理失败！', {
-					icon : 2,
-					time : 1000
-				});
-			}
-			var index = parent.layer.getFrameIndex(window.name);
-			parent.layer.close(index);
-
-			$("#jqGrid").trigger("reloadGrid");
-		},
-		error : function() {
-			top.ajaxLoadEnd();
-
-			parent.layer.msg('处理失败！', {
-				icon : 2,
-				time : 1000
-			});
-			var index = parent.layer.getFrameIndex(window.name);
-			parent.layer.close(index);
-
-			$("#jqGrid").trigger("reloadGrid");
-		}
+	parent.layer.open({
+		title: "管理预约",
+		type: 2,
+		area: ["60%", "60%"],
+		content: rootPath + '/building/reserve/manageUI.shtml?id=' + rowIds[0],
+		end : function(){
+			$("#jqGrid").trigger('reloadGrid');
+	    }
 	});
+
+	
 }

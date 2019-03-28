@@ -13,8 +13,8 @@
 <body>
 	<form role="form" id="searchForm" name="searchForm" style="position:relative">
 		<div class="choice_condition_menu">
-			<input id="queryparam" class="selectpicker" placeholder="客户姓名/客户电话"
-				style="width: 150px;">
+			<input id="queryparam" class="selectpicker" placeholder="客户姓名/客户电话/户型名称"
+				style="width: 250px;">
 				<input id="reserveStartTime" class="selectpicker"
 					placeholder="预约开始时间" style="width: 150px;">
 			-

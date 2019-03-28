@@ -15,6 +15,8 @@
 			client_name like concat ('%',#{clientName},'%')
 			or
 			client_phone like concat ('%',#{clientPhone},'%')
+			or
+			apartment_name like concat ('%',#{apartmentName},'%')
 		)
 		</if>
 		<if test="reserveStartTime != null and reserveStartTime != ''">
@@ -120,6 +122,18 @@
 			</if>
 			<if test="is_manage != null">
 				is_manage = #{is_manage},
+			</if>
+			<if test="manage_result != null">
+				manage_result = #{manage_result},
+			</if>
+			<if test="manage_time != null">
+				manage_time = #{manage_time},
+			</if>
+			<if test="manage_user_name != null">
+				manage_user_name = #{manage_user_name},
+			</if>
+			<if test="manage_user_phone != null">
+				manage_user_phone = #{manage_user_phone},
 			</if>
 			<if test="remarks != null">
 				remarks = #{remarks},

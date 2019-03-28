@@ -71,6 +71,7 @@ public class BuildingReserveController extends BaseController {
 		String isManage = request.getParameter("isManage");
 
 		reserveFormMap.put("queryparam", queryparam);
+		reserveFormMap.put("apartmentName", queryparam);
 		reserveFormMap.put("clientName", queryparam);
 		reserveFormMap.put("clientPhone", queryparam);
 		reserveFormMap.put("reserveStartTime", reserveStartTime);
@@ -93,15 +94,32 @@ public class BuildingReserveController extends BaseController {
 		return pageView;
 	}
 
+	@RequestMapping("manageUI")
+	@SystemLog(module = "楼盘管理-预定管理", methods = "打开预约处理页面")
+	public String manageUI(HttpServletRequest request, Model model) {
+		String id = request.getParameter("id");
+		model.addAttribute("id", id);
+		return Common.BACKGROUND_PATH + "/building/reserve/manage";
+	}
+
 	@ResponseBody
 	@RequestMapping("manage")
 	@Transactional(readOnly = false)
 	@SystemLog(module = "楼盘管理-预定管理", methods = "处理预定")
 	public String manage(HttpServletRequest request) {
-		String ids = request.getParameter("ids");
-		String type = request.getParameter("type");
+		String id = request.getParameter("id");
+		String manageResult = request.getParameter("manageResult");
+		String manageTime = request.getParameter("manageTime");
+		String manageUserName = request.getParameter("manageUserName");
+		String manageUserPhone = request.getParameter("manageUserPhone");
 
-		if (StringUtils.isBlank(ids) || StringUtils.isBlank(type)) {
+		if (StringUtils.isBlank(id)) {
+			return "fail";
+		}
+		if (StringUtils.isBlank(manageResult) || StringUtils.isBlank(manageTime)) {
+			return "fail";
+		}
+		if (StringUtils.isBlank(manageUserName) || StringUtils.isBlank(manageUserPhone)) {
 			return "fail";
 		}
 
@@ -111,24 +129,21 @@ public class BuildingReserveController extends BaseController {
 		String userName = (String) userFormMap.get("name");
 		String currentDateTime = DateTimeUtil.getCurrentDateTime();
 
-		String[] idsArray = ids.split(",");
-		for (String id : idsArray) {
-			BuildingReserveFormMap formMap = new BuildingReserveFormMap();
-			formMap.put("id", id);
-			if (type.equals("yes")) {
-				formMap.put("is_manage", String.valueOf(Constants.YES));
-			} else if (type.equals("no")) {
-				formMap.put("is_manage", String.valueOf(Constants.NO));
-			}
-			formMap.put("update_user_id", userId);
-			formMap.put("update_user_name", userName);
-			formMap.put("update_time", currentDateTime);
+		BuildingReserveFormMap formMap = new BuildingReserveFormMap();
+		formMap.put("id", id);
+		formMap.put("is_manage", String.valueOf(Constants.YES));
+		formMap.put("manage_result", manageResult);
+		formMap.put("manage_time", manageTime);
+		formMap.put("manage_user_name", manageUserName);
+		formMap.put("manage_user_phone", manageUserPhone);
+		formMap.put("update_user_id", userId);
+		formMap.put("update_user_name", userName);
+		formMap.put("update_time", currentDateTime);
 
-			try {
-				reserveService.updateById(formMap);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		try {
+			reserveService.updateById(formMap);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return "success";
 	}
