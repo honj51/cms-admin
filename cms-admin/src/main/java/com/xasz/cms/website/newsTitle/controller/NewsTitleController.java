@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,9 +39,6 @@ public class NewsTitleController extends BaseController {
 
 	@Inject
 	private IDService idService;
-
-	@Value("${host.baseUrl}")
-	private String baseUrl;
 
 	@RequestMapping("list")
 	@SystemLog(module = "集团官网管理-新闻标题管理", methods = "打开页面")
