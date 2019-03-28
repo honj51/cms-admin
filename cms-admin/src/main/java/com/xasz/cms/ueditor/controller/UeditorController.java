@@ -77,15 +77,40 @@ public class UeditorController extends BaseController {
 		sb.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
 		sb.append("</head>");
 		sb.append("<body>");
+		sb.append("<style>");
+		sb.append("\r\n" + 
+				"  .pre{\r\n" + 
+				"         font-size: 16px;\r\n" + 
+				"         color: chocolate;\r\n" + 
+				"         margin-top: 5%;\r\n" + 
+				"         margin-left: 22%;\r\n" + 
+				"  }\r\n" + 
+				"  .pre:hover{\r\n" + 
+				"       color: rgb(100, 90, 83);\r\n" + 
+				"    \r\n" + 
+				"  }\r\n" + 
+				"");
+		sb.append("</style>");
+		sb.append("<div class=\"pre\" onclick=\"fun()\">返回首页</div>");
 		sb.append("<div style='width:90%;margin:20px auto;border:1px solid #ccc;'>");
 		sb.append(webHtml);
 		sb.append("</div>");
 		sb.append("</body>");
+		sb.append("<script type=\"application/javascript\">\r\n" + 
+				"    $(function(){\r\n" + 
+				"        var id = sessionStorage.getItem(\"id\")\r\n" + 
+				"    })\r\n" + 
+				"    function fun(th){\r\n" + 
+				"		sessionStorage.setItem(\"id\", $(th).attr(\"id\"))\r\n" + 
+				"		$(\"#cneyshe\").load(\"index-main.html\");\r\n" + 
+				"		//window.open(\"newsxq.html?id=\"+$(th).attr(\"id\"));\r\n" + 
+				"    }\r\n" + 
+				"\r\n" + 
+				"</script>");
 		sb.append("</html>");
 
 		printStream.println(sb.toString());
-
-//		createFile(path + fileName, html);
+		printStream.close();
 
 		String url = webFileUrl + fileName;
 
