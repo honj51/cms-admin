@@ -39,6 +39,12 @@
 			<if test="id != null">
 				id,
 			</if>
+			<if test="appartment_id != null">
+				appartment_id,
+			</if>
+			<if test="appartment_name != null">
+				appartment_name,
+			</if>
 			<if test="reserve_time != null">
 				reserve_time,
 			</if>
@@ -73,6 +79,12 @@
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				#{id,jdbcType=CHAR},
+			</if>
+			<if test="appartment_id != null">
+				#{appartment_id,jdbcType=CHAR},
+			</if>
+			<if test="appartment_name != null">
+				#{appartment_name,jdbcType=VARCHAR},
 			</if>
 			<if test="reserve_time != null">
 				#{reserve_time,jdbcType=TIMESTAMP},

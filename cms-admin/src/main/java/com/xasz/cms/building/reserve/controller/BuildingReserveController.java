@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xasz.cms.annotation.SystemLog;
+import com.xasz.cms.building.apartment.entity.BuildingApartmentFormMap;
+import com.xasz.cms.building.apartment.service.BuildingApartmentService;
 import com.xasz.cms.building.reserve.entity.BuildingReserveFormMap;
 import com.xasz.cms.building.reserve.service.BuildingReserveService;
 import com.xasz.cms.controller.index.BaseController;
@@ -38,6 +40,9 @@ public class BuildingReserveController extends BaseController {
 
 	@Inject
 	private BuildingReserveService reserveService;
+
+	@Inject
+	private BuildingApartmentService apartmentService;
 
 	@Inject
 	private IDService idService;
@@ -159,19 +164,29 @@ public class BuildingReserveController extends BaseController {
 	public String addReserve(HttpServletRequest request, HttpServletResponse response) {
 		response.setHeader("Access-Control-Allow-Origin", "*");
 
+		String appartmentId = request.getParameter("apartmentId");
 		String reserveTime = request.getParameter("reserveTime");
 		String clientName = request.getParameter("clientName");
 		String clientPhone = request.getParameter("clientPhone");
 		String remarks = request.getParameter("remarks");
 
-		if (StringUtils.isBlank(reserveTime) || StringUtils.isBlank(clientName) || StringUtils.isBlank(clientPhone)) {
+		if (StringUtils.isBlank(appartmentId) || StringUtils.isBlank(reserveTime) || StringUtils.isBlank(clientName)
+				|| StringUtils.isBlank(clientPhone)) {
 			return "fail";
+		}
+
+		// 查询户型信息
+		BuildingApartmentFormMap apartmentFormMap = apartmentService.findById(appartmentId);
+		if (null == apartmentFormMap) {
+			return "no_apartment";
 		}
 
 		reserveTime = reserveTime.replaceAll("T", " ");
 
 		BuildingReserveFormMap formMap = new BuildingReserveFormMap();
 		formMap.put("id", idService.getID());
+		formMap.put("appartment_id", appartmentId);
+		formMap.put("appartment_name", (String) apartmentFormMap.get("name"));
 		formMap.put("reserve_time", reserveTime);
 		formMap.put("client_name", clientName);
 		formMap.put("client_phone", clientPhone);
