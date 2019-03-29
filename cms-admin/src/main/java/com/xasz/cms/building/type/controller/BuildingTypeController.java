@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +48,6 @@ public class BuildingTypeController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("findByPage")
-	@Transactional(readOnly = true)
 	@SystemLog(module = "楼盘管理-户型类型管理", methods = "加载页面数据")
 	public PageView findByPage(HttpServletRequest request) {
 		String page = request.getParameter("page");
@@ -88,7 +86,6 @@ public class BuildingTypeController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("add")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "楼盘管理-户型类型管理", methods = "新增类型")
 	public String add(HttpServletRequest request) {
 		String name = request.getParameter("name");
@@ -145,7 +142,6 @@ public class BuildingTypeController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("edit")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "楼盘管理-户型类型管理", methods = "新增类型")
 	public String edit(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -197,7 +193,6 @@ public class BuildingTypeController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("delete")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "内部管理-部门管理", methods = "删除部门")
 	public String del(HttpServletRequest request) {
 		String ids = request.getParameter("ids");
