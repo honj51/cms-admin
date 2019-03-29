@@ -50,7 +50,9 @@ public class Websocket {
 	 */
 	public void sendToUser(String accountName, String message) {
 		try {
-			webSocketSet.get(accountName).sendMessage(message);
+			if(webSocketSet.containsKey(accountName)){
+				webSocketSet.get(accountName).sendMessage(message);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
