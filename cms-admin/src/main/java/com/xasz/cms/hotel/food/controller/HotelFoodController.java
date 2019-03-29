@@ -14,7 +14,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,7 +64,6 @@ public class HotelFoodController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("findByPage")
-	@Transactional(readOnly = true)
 	@SystemLog(module = "酒店管理-当日餐品管理", methods = "加载页面数据")
 	public PageView findByPage(HttpServletRequest request) {
 		String page = request.getParameter("page");
@@ -106,7 +104,6 @@ public class HotelFoodController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("add")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "酒店管理-当日餐品管理", methods = "新增宣传")
 	public String add(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -166,7 +163,6 @@ public class HotelFoodController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("uploadFirst")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "酒店管理-当日餐品管理", methods = "上传图片")
 	public String uploadFirst(@RequestParam("firstUrl") MultipartFile file, HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -232,7 +228,6 @@ public class HotelFoodController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("uploadSecond")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "酒店管理-当日餐品管理", methods = "上传图片")
 	public String uploadSecond(@RequestParam("secondUrl") MultipartFile file, HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -298,7 +293,6 @@ public class HotelFoodController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("deletePhoto")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "酒店管理-当日餐品管理", methods = "删除图片")
 	public String deletePhoto(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -338,7 +332,6 @@ public class HotelFoodController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("edit")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "酒店管理-当日餐品管理", methods = "修改宣传")
 	public String edit(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -379,7 +372,6 @@ public class HotelFoodController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("delete")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "酒店管理-当日餐品管理", methods = "删除广告")
 	public String del(HttpServletRequest request) {
 		String ids = request.getParameter("ids");

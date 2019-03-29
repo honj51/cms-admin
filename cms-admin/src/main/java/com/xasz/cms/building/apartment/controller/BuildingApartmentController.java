@@ -14,7 +14,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -108,7 +107,6 @@ public class BuildingApartmentController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("add")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "楼盘管理-户型管理", methods = "新增户型")
 	public String add(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -211,7 +209,6 @@ public class BuildingApartmentController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("edit")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "楼盘管理-户型管理", methods = "修改户型")
 	public String edit(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -275,7 +272,6 @@ public class BuildingApartmentController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("delete")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "楼盘管理-户型管理", methods = "删除户型")
 	public String del(HttpServletRequest request) {
 		String ids = request.getParameter("ids");
@@ -311,7 +307,6 @@ public class BuildingApartmentController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("upload")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "楼盘管理-户型管理", methods = "上传缩略图")
 	public String upload(@RequestParam("url") MultipartFile file, HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -376,7 +371,6 @@ public class BuildingApartmentController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("uploadUrlOne")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "楼盘管理-户型管理", methods = "上传轮播图一")
 	public String uploadUrlOne(@RequestParam("urlOne") MultipartFile file, HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -441,7 +435,6 @@ public class BuildingApartmentController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("uploadUrlTwo")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "楼盘管理-户型管理", methods = "上传轮播图一")
 	public String uploadUrlTwo(@RequestParam("urlTwo") MultipartFile file, HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -506,7 +499,6 @@ public class BuildingApartmentController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("uploadUrlThree")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "楼盘管理-户型管理", methods = "上传轮播图一")
 	public String uploadUrlThree(@RequestParam("urlThree") MultipartFile file, HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -571,7 +563,6 @@ public class BuildingApartmentController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("uploadZip")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "楼盘管理-户型管理", methods = "上传360全景图")
 	public String uploadZip(@RequestParam("zipFile") MultipartFile file, HttpServletRequest request) {
 		String id = request.getParameter("id");

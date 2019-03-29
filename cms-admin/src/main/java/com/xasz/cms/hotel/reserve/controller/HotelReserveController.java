@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,7 +53,6 @@ public class HotelReserveController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("findByPage")
-	@Transactional(readOnly = true)
 	@SystemLog(module = "酒店管理-预定管理", methods = "加载页面数据")
 	public PageView findByPage(HttpServletRequest request) {
 		String page = request.getParameter("page");
@@ -97,7 +95,6 @@ public class HotelReserveController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("manage")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "酒店管理-预定管理", methods = "处理预定")
 	public String manage(HttpServletRequest request) {
 		String ids = request.getParameter("ids");
