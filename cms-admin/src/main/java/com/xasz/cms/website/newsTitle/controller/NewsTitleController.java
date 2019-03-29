@@ -49,7 +49,6 @@ public class NewsTitleController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("findByPage")
-	@Transactional(readOnly = true)
 	@SystemLog(module = "集团官网管理-新闻标题管理", methods = "加载页面数据")
 	public PageView findByPage(HttpServletRequest request) {
 		String page = request.getParameter("page");
@@ -88,7 +87,6 @@ public class NewsTitleController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("add")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "集团官网管理-新闻标题管理", methods = "新增新闻")
 	public String add(HttpServletRequest request) {
 		String name = request.getParameter("name");
@@ -139,7 +137,6 @@ public class NewsTitleController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("edit")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "集团官网管理-新闻标题管理", methods = "修改新闻")
 	public String edit(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -178,7 +175,6 @@ public class NewsTitleController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("delete")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "集团官网管理-新闻标题管理", methods = "删除集团")
 	public String del(HttpServletRequest request) {
 		String ids = request.getParameter("ids");

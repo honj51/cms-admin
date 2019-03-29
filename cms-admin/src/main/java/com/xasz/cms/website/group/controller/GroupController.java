@@ -59,7 +59,6 @@ public class GroupController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("findByPage")
-	@Transactional(readOnly = true)
 	@SystemLog(module = "集团官网管理-集团管理", methods = "加载页面数据")
 	public PageView findByPage(HttpServletRequest request) {
 		String page = request.getParameter("page");
@@ -97,7 +96,7 @@ public class GroupController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("add")
-	@Transactional(readOnly = false)
+	
 	@SystemLog(module = "集团官网管理-集团管理", methods = "新增集团")
 	public String add(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -156,7 +155,7 @@ public class GroupController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("upload")
-	@Transactional(readOnly = false)
+	
 	@SystemLog(module = "集团官网管理-集团管理", methods = "上传集团图片")
 	public String upload(@RequestParam("url") MultipartFile file, HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -222,7 +221,7 @@ public class GroupController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("deletePhoto")
-	@Transactional(readOnly = false)
+	
 	@SystemLog(module = "集团官网管理-集团管理", methods = "删除集团图片")
 	public String deletePhoto(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -255,7 +254,7 @@ public class GroupController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("edit")
-	@Transactional(readOnly = false)
+	
 	@SystemLog(module = "集团官网管理-集团管理", methods = "修改集团")
 	public String edit(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -294,7 +293,7 @@ public class GroupController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("delete")
-	@Transactional(readOnly = false)
+	
 	@SystemLog(module = "集团官网管理-集团管理", methods = "删除集团")
 	public String del(HttpServletRequest request) {
 		String ids = request.getParameter("ids");

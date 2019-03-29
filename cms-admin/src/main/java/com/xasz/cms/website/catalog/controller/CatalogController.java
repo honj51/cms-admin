@@ -88,7 +88,7 @@ public class CatalogController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("add")
-	@Transactional(readOnly = false)
+	
 	@SystemLog(module = "集团官网管理-目录管理", methods = "新增目录")
 	public String add(HttpServletRequest request) {
 		String name = request.getParameter("name");
@@ -135,7 +135,7 @@ public class CatalogController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("edit")
-	@Transactional(readOnly = false)
+	
 	@SystemLog(module = "集团官网管理-目录管理", methods = "修改目录")
 	public String edit(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -171,7 +171,7 @@ public class CatalogController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("delete")
-	@Transactional(readOnly = false)
+	
 	@SystemLog(module = "集团官网管理-目录管理", methods = "删除目录")
 	public String del(HttpServletRequest request) {
 		String ids = request.getParameter("ids");

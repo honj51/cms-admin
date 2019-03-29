@@ -67,7 +67,6 @@ public class AdvertisementController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("findByPage")
-	@Transactional(readOnly = true)
 	@SystemLog(module = "集团官网管理-广告管理", methods = "加载页面数据")
 	public PageView findByPage(HttpServletRequest request) {
 		String page = request.getParameter("page");
@@ -106,7 +105,6 @@ public class AdvertisementController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("add")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "集团官网管理-广告管理", methods = "新增广告")
 	public String add(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -159,7 +157,6 @@ public class AdvertisementController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("upload")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "集团官网管理-广告管理", methods = "上传广告图片")
 	public String upload(@RequestParam("url") MultipartFile file, HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -225,7 +222,6 @@ public class AdvertisementController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("deletePhoto")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "集团官网管理-广告管理", methods = "删除广告图片")
 	public String deletePhoto(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -258,7 +254,7 @@ public class AdvertisementController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("edit")
-	@Transactional(readOnly = false)
+	
 	@SystemLog(module = "集团官网管理-广告管理", methods = "修改广告")
 	public String edit(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -292,7 +288,6 @@ public class AdvertisementController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("delete")
-	@Transactional(readOnly = false)
 	@SystemLog(module = "集团官网管理-广告管理", methods = "删除广告")
 	public String del(HttpServletRequest request) {
 		String ids = request.getParameter("ids");
