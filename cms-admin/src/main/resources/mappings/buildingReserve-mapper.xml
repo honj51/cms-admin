@@ -39,11 +39,11 @@
 			<if test="id != null">
 				id,
 			</if>
-			<if test="appartment_id != null">
-				appartment_id,
+			<if test="apartment_id != null">
+				apartment_id,
 			</if>
-			<if test="appartment_name != null">
-				appartment_name,
+			<if test="apartment_name != null">
+				apartment_name,
 			</if>
 			<if test="apartment_address != null">
 				apartment_address,
@@ -86,11 +86,11 @@
 			<if test="id != null">
 				#{id,jdbcType=CHAR},
 			</if>
-			<if test="appartment_id != null">
-				#{appartment_id,jdbcType=CHAR},
+			<if test="apartment_id != null">
+				#{apartment_id,jdbcType=CHAR},
 			</if>
-			<if test="appartment_name != null">
-				#{appartment_name,jdbcType=VARCHAR},
+			<if test="apartment_name != null">
+				#{apartment_name,jdbcType=VARCHAR},
 			</if>
 			<if test="apartment_address != null">
 				#{apartment_address,jdbcType=VARCHAR},
