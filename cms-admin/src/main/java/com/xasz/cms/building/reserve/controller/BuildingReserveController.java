@@ -157,7 +157,7 @@ public class BuildingReserveController extends BaseController {
 
 		// 发送微信处理通知
 		String noticeUrl = "http://47.104.242.41:80/ns_weixin/sendTeml";
-		httpService.executPost(noticeUrl, id);
+		httpService.executPost(noticeUrl, "id=" + id + "&state=" + manageResult);
 
 		return "success";
 	}
