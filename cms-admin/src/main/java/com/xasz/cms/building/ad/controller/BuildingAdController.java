@@ -335,70 +335,70 @@ public class BuildingAdController extends BaseController {
 
 	public static void main(String[] args) throws Exception {
 		
-		Thumbnails.of("C:\\Users\\rod\\Desktop\\upload\\1553656651926153982809.png" )
-		.scale(0.5).outputQuality(0.1d)
-		.toFile("C:\\Users\\rod\\Desktop\\upload\\1553656651926153982809.png" );
 		
+		String zipFilePath = "C:\\Users\\rod\\Desktop\\360555.zip";
+		String fileSavePath = "C:\\Users\\rod\\Desktop\\新建文件夹";
+		boolean isDelete = false;
+		int BUFFEREDSIZE = 1024;
 		
-//		String zipFilePath = "C:\\Users\\rod\\Desktop\\upload\\images.zip";
-//		String fileSavePath = "C:\\Users\\rod\\Desktop\\新建文件夹";
-//		boolean isDelete = false;
-//		int BUFFEREDSIZE = 1024;
-//
-//		try {
-//			(new File(fileSavePath)).mkdirs();
-//			File f = new File(zipFilePath);
-//			if ((!f.exists()) && (f.length() <= 0)) {
-//				throw new Exception("要解压的文件不存在!");
-//			}
-//			ZipFile zipFile = new ZipFile(f);
-//			String strPath, gbkPath, strtemp;
-//			File tempFile = new File(fileSavePath);// 从当前目录开始
-//			strPath = tempFile.getAbsolutePath();// 输出的绝对位置
-//			Enumeration<ZipEntry> e = zipFile.getEntries();
-//			while (e.hasMoreElements()) {
-//				ZipEntry zipEnt = e.nextElement();
-//				gbkPath = zipEnt.getName();
-//				if (zipEnt.isDirectory()) {
-//					strtemp = strPath + File.separator + gbkPath;
-//					File dir = new File(strtemp);
-//					dir.mkdirs();
-//					continue;
-//				} else {
-//					// 读写文件
-//					InputStream is = zipFile.getInputStream(zipEnt);
-//					BufferedInputStream bis = new BufferedInputStream(is);
-//					gbkPath = zipEnt.getName();
-//					strtemp = strPath + File.separator + gbkPath;
-//					// 建目录
-//					String strsubdir = gbkPath;
-//					for (int i = 0; i < strsubdir.length(); i++) {
-//						if (strsubdir.substring(i, i + 1).equalsIgnoreCase("/")) {
-//							String temp = strPath + File.separator + strsubdir.substring(0, i);
-//							File subdir = new File(temp);
-//							if (!subdir.exists())
-//								subdir.mkdir();
-//						}
-//					}
-//					FileOutputStream fos = new FileOutputStream(strtemp);
-//					BufferedOutputStream bos = new BufferedOutputStream(fos);
-//					int len;
-//					byte[] buff = new byte[BUFFEREDSIZE];
-//					while ((len = bis.read(buff)) != -1) {
-//						bos.write(buff, 0, len);
-//					}
-//					bos.close();
-//					fos.close();
-//					zipFile.close();
-//				}
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw e;
-//		}
-//		if (isDelete) {
-//			new File(zipFilePath).delete();
-//		}
+		FileOutputStream fos = null;
+		BufferedOutputStream bos = null;
+		ZipFile zipFile = null;
+		try {
+			(new File(fileSavePath)).mkdirs();
+			File f = new File(zipFilePath);
+			if ((!f.exists()) && (f.length() <= 0)) {
+				throw new Exception("要解压的文件不存在!");
+			}
+			zipFile = new ZipFile(f);
+			String strPath, gbkPath, strtemp;
+			File tempFile = new File(fileSavePath);// 从当前目录开始
+			strPath = tempFile.getAbsolutePath();// 输出的绝对位置
+			Enumeration<ZipEntry> e = zipFile.getEntries();
+			while (e.hasMoreElements()) {
+				ZipEntry zipEnt = e.nextElement();
+				gbkPath = zipEnt.getName();
+				if (zipEnt.isDirectory()) {
+					strtemp = strPath + File.separator + gbkPath;
+					File dir = new File(strtemp);
+					dir.mkdirs();
+					continue;
+				} else {
+					// 读写文件
+					InputStream is = zipFile.getInputStream(zipEnt);
+					BufferedInputStream bis = new BufferedInputStream(is);
+					gbkPath = zipEnt.getName();
+					strtemp = strPath + File.separator + gbkPath;
+					// 建目录
+					String strsubdir = gbkPath;
+					for (int i = 0; i < strsubdir.length(); i++) {
+						if (strsubdir.substring(i, i + 1).equalsIgnoreCase("/")) {
+							String temp = strPath + File.separator + strsubdir.substring(0, i);
+							File subdir = new File(temp);
+							if (!subdir.exists())
+								subdir.mkdir();
+						}
+					}
+					fos = new FileOutputStream(strtemp);
+					bos = new BufferedOutputStream(fos);
+					int len;
+					byte[] buff = new byte[BUFFEREDSIZE];
+					while ((len = bis.read(buff)) != -1) {
+						bos.write(buff, 0, len);
+					}
+					bos.close();
+					fos.close();
+				}
+			}
+			zipFile.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			zipFile.close();
+			throw e;
+		}
+		if (isDelete) {
+			new File(zipFilePath).delete();
+		}
 	}
 
 }

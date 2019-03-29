@@ -239,8 +239,8 @@
 		<if test="floor != null and floor != ''">
 			and floor = ${floor}
 		</if>
-		<if test="renovation != null and renovation != ''">
-			and renovation = #{renovation}
+		<if test="typeId != null and typeId != ''">
+			and type_id = #{typeId}
 		</if>
 		<if test="price != null and price != ''">
 			order by #{price},create_time desc
