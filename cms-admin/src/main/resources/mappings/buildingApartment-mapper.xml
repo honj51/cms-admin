@@ -222,7 +222,28 @@
 	
 	<select id="findById" parameterType="string" resultType="com.xasz.cms.building.apartment.entity.BuildingApartmentFormMap">
 		select
-			*
+			id,
+			type_id,
+			type_name,
+			name,
+			price,
+			floor,
+			renovation,
+			url,
+			url_one,
+			url_two,
+			url_three,
+			panorama_url,
+			address,
+			phone,
+			DATE_FORMAT(opening_time, '%Y-%m-%d') AS opening_time,
+			DATE_FORMAT(hand_time, '%Y-%m-%d') AS hand_time,
+			create_user_id,
+			create_user_name,
+			create_time,
+			update_user_id,
+			update_user_name,
+			update_time
 		from
 			building_apartment
 		where
