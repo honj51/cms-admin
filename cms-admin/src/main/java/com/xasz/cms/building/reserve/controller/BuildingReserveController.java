@@ -25,6 +25,7 @@ import com.xasz.cms.building.reserve.entity.BuildingReserveFormMap;
 import com.xasz.cms.building.reserve.service.BuildingReserveService;
 import com.xasz.cms.controller.index.BaseController;
 import com.xasz.cms.global.Constants;
+import com.xasz.cms.http.service.HttpService;
 import com.xasz.cms.plugin.PageView;
 import com.xasz.cms.service.IDService;
 import com.xasz.cms.user.entity.UserFormMap;
@@ -49,6 +50,9 @@ public class BuildingReserveController extends BaseController {
 
 	@Inject
 	private UserService userService;
+
+	@Inject
+	private HttpService httpService;
 
 	@RequestMapping("list")
 	@SystemLog(module = "楼盘管理-预定管理", methods = "打开页面")
@@ -150,6 +154,11 @@ public class BuildingReserveController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		// 发送微信处理通知
+		String noticeUrl = "http://47.104.242.41:80/ns_weixin/sendTeml";
+		httpService.executPost(noticeUrl, id);
+
 		return "success";
 	}
 
@@ -165,6 +174,7 @@ public class BuildingReserveController extends BaseController {
 		response.setHeader("Access-Control-Allow-Origin", "*");
 
 		String appartmentId = request.getParameter("apartmentId");
+		String openid = request.getParameter("openid");
 		String reserveTime = request.getParameter("reserveTime");
 		String clientName = request.getParameter("clientName");
 		String clientPhone = request.getParameter("clientPhone");
@@ -187,6 +197,8 @@ public class BuildingReserveController extends BaseController {
 		formMap.put("id", idService.getID());
 		formMap.put("appartment_id", appartmentId);
 		formMap.put("appartment_name", (String) apartmentFormMap.get("name"));
+		formMap.put("apartment_address", (String) apartmentFormMap.get("address"));
+		formMap.put("openid", openid);
 		formMap.put("reserve_time", reserveTime);
 		formMap.put("client_name", clientName);
 		formMap.put("client_phone", clientPhone);

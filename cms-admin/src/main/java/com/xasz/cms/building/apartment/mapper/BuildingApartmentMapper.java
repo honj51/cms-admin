@@ -4,21 +4,29 @@ import java.util.List;
 
 import com.xasz.cms.building.apartment.entity.BuildingApartmentFormMap;
 import com.xasz.cms.building.type.entity.BuildingTypeFormMap;
-import com.xasz.cms.website.advertisement.entity.AdvertisementFormMap;
 
 public interface BuildingApartmentMapper {
 
 	/**
 	 * 分页查找
+	 * 
 	 * @param buildingTypeFormMap
 	 * @return
 	 */
-	List<BuildingApartmentFormMap> findByPage(BuildingTypeFormMap buildingTypeFormMap);
+	public List<BuildingApartmentFormMap> findByPage(BuildingTypeFormMap buildingTypeFormMap);
 
-	BuildingApartmentFormMap findById(String id);
+	public BuildingApartmentFormMap findById(String id);
 
-	void updateById(AdvertisementFormMap formMap) throws Exception;
+	public void updateById(BuildingApartmentFormMap formMap) throws Exception;
 
-	void add(BuildingApartmentFormMap formMap) throws Exception;
+	public void add(BuildingApartmentFormMap formMap) throws Exception;
+
+	/**
+	 * 根据条件查找所有户型
+	 * 
+	 * @param formMap
+	 * @return
+	 */
+	public List<BuildingApartmentFormMap> findAll(BuildingApartmentFormMap formMap);
 
 }

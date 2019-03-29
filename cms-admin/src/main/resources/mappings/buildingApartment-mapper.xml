@@ -57,6 +57,9 @@
 			<if test="url_three != null">
 				url_three,
 			</if>
+			<if test="panorama_url != null">
+				panorama_url,
+			</if>
 			<if test="address != null">
 				address,
 			</if>
@@ -121,6 +124,9 @@
 			</if>
 			<if test="url_three != null">
 				#{url_three,jdbcType=VARCHAR},
+			</if>
+			<if test="panorama_url != null">
+				#{panorama_url,jdbcType=VARCHAR},
 			</if>
 			<if test="address != null">
 				#{address,jdbcType=VARCHAR},
@@ -189,6 +195,9 @@
 			<if test="url_three != null">
 				url_three=#{url_three},
 			</if>
+			<if test="panorama_url != null">
+				panorama_url=#{panorama_url},
+			</if>
 			<if test="address != null">
 				address=#{address},
 			</if>
@@ -220,6 +229,25 @@
 			id = #{id}
 	</select>
 	
-	
+	<select id="findAll" resultType="com.xasz.cms.building.apartment.entity.BuildingApartmentFormMap">
+		select
+			*
+		from
+			building_apartment
+		where
+			is_delete = 0
+		<if test="floor != null and floor != ''">
+			and floor = ${floor}
+		</if>
+		<if test="renovation != null and renovation != ''">
+			and renovation = #{renovation}
+		</if>
+		<if test="price != null and price != ''">
+			order by #{price},create_time desc
+		</if>
+		<if test="price == null or price == ''">
+			order by create_time desc
+		</if>
+	</select>
 	
 </mapper>

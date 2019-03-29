@@ -26,66 +26,172 @@
 		<div class="col-md-6">
 			<form role="form" class="form-horizontal">
 				<div class="form-group">
-					<label class="col-sm-3 control-label">广告位置</font></label>
+					<label class="col-sm-3 control-label">类型</label>
 					<div class="col-sm-8">
-						<select id="position" class="selectpicker" data-width="100px">
-							<option value="1"
-								<c:if test="${1==formMap.position }">
-							selected = "selected"
-							</c:if>>集团首页轮播图</option>
-							<option value="2"
-								<c:if test="${2==formMap.position }">
-							selected = "selected"
-							</c:if>>集团介绍轮播图</option>
-							<option value="3"
-								<c:if test="${3==formMap.position }">
-							selected = "selected"
-							</c:if>>企业文化轮播图</option>
-							<option value="4"
-								<c:if test="${4==formMap.position }">
-							selected = "selected"
-							</c:if>>新闻动态轮播图</option>
-							<option value="5"
-								<c:if test="${5==formMap.position }">
-							selected = "selected"
-							</c:if>>业务领域轮播图</option>
-							<option value="6"
-								<c:if test="${6==formMap.position }">
-							selected = "selected"
-							</c:if>>人才招聘轮播图</option>
-							<option value="7"
-								<c:if test="${7==formMap.position }">
-							selected = "selected"
-							</c:if>>联系我们轮播图</option>
-							<option value="8"
-								<c:if test="${8==formMap.position }">
-							selected = "selected"
-							</c:if>>集团首页左下方轮播图</option>
-							<option value="9"
-								<c:if test="${9==formMap.position }">
-							selected = "selected"
-							</c:if>>集团首页右下方轮播图</option>
+						<select id="type" class="selectpicker" data-width="200px">
+							<option value="">请选择</option>
+							<c:forEach items="${typeFormMaps}" var="typeFormMap">
+								<option value="${typeFormMap.id}"
+									<c:if test="${typeFormMap.id==formMap.type_id}">
+							selected="selected"
+						</c:if>>${typeFormMap.name}</option>
+							</c:forEach>
 						</select>
 					</div>
 				</div>
+
 				<div class="form-group">
-					<label class="col-sm-3 control-label">广告图片</label>
+					<label class="col-sm-3 control-label">装修类型</label>
+					<div class="col-sm-8">
+						<select id="renovation" class="selectpicker" data-width="200px">
+							<option value="">请选择</option>
+							<option value="1"
+								<c:if test="${1==formMap.renovation }">
+							selected = "selected"
+							</c:if>>毛坯房</option>
+							<option value="2"
+								<c:if test="${2==formMap.renovation }">
+							selected = "selected"
+							</c:if>>简装房</option>
+							<option value="3"
+								<c:if test="${3==formMap.renovation }">
+							selected = "selected"
+							</c:if>>精装房</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">楼盘位置</label>
+					<div class="col-sm-8">
+						<input id="address" name="address" class="form-control"
+							value="${formMap.address}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">售楼电话</label>
+					<div class="col-sm-8">
+						<input id="phone" name="phone" class="form-control"
+							value="${formMap.phone}" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">全景图压缩包</label>
+					<div class="col-sm-8">
+						<input id="zipFile" name="zipFile" type="file"
+							class="file-loading" accept="application/x-zip-compressed" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">缩略图</label>
 					<div class="col-sm-8">
 						<input id="url" name="url" type="file" class="file-loading"
 							accept="image/*" />
 					</div>
 				</div>
 
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">轮播二</label>
+					<div class="col-sm-8">
+						<input id="urlTwo" name="urlTwo" type="file" class="file-loading"
+							accept="image/*" />
+					</div>
+				</div>
+
+
 			</form>
 		</div>
+
+		<div class="col-md-6">
+			<form role="form" class="form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-3 control-label">楼层</label>
+					<div class="col-sm-8">
+						<select id="floor" class="selectpicker" data-width="200px">
+							<option value="">请选择</option>
+							<option value="1"
+								<c:if test="${1==formMap.floor }">
+							selected = "selected"
+							</c:if>>低层</option>
+							<option value="2"
+								<c:if test="${2==formMap.floor }">
+							selected = "selected"
+							</c:if>>中层</option>
+							<option value="3"
+								<c:if test="${3==formMap.floor }">
+							selected = "selected"
+							</c:if>>高层</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">名称</label>
+					<div class="col-sm-8">
+						<input id="name" name="name" class="form-control"
+							value="${formMap.name}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">房价</label>
+					<div class="col-sm-8">
+						<input id="price" name="price" class="form-control"
+							value="${formMap.price}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">开盘时间</label>
+					<div class="col-sm-8">
+						<input id="openingTime" class="form-control"
+							value="${formMap.opening_time}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">交房时间</label>
+					<div class="col-sm-8">
+						<input id="handTime" class="form-control"
+							value="${formMap.hand_time}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">轮播一</label>
+					<div class="col-sm-8">
+						<input id="urlOne" name="urlOne" type="file" class="file-loading"
+							accept="image/*" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">轮播三</label>
+					<div class="col-sm-8">
+						<input id="urlThree" name="urlThree" type="file"
+							class="file-loading" accept="image/*" />
+					</div>
+				</div>
+
+			</form>
+		</div>
+
 	</div>
 
 	<script>
 		var rootPath = "${ctx}";
 		var id = "${formMap.id}";
 		var url = "${formMap.url}";
+		var urlOne = "${formMap.url_one}";
+		var urlTwo = "${formMap.url_two}";
+		var urlThree = "${formMap.url_three}";
 	</script>
 	<script src="${ctx}/common/common.js"></script>
-	<script src="${ctx}/js/website/advertisement/edit.js<%=ts%>"></script>
+	<script src="${ctx}/js/building/apartment/edit.js<%=ts%>"></script>
 </body>
 </html>

@@ -6,11 +6,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.github.pagehelper.Page;
 import com.xasz.cms.building.apartment.entity.BuildingApartmentFormMap;
 import com.xasz.cms.building.apartment.mapper.BuildingApartmentMapper;
 import com.xasz.cms.building.type.entity.BuildingTypeFormMap;
-import com.xasz.cms.website.advertisement.entity.AdvertisementFormMap;
 
 @Service
 public class BuildingApartmentService {
@@ -26,12 +24,16 @@ public class BuildingApartmentService {
 		return apartmentMapper.findById(id);
 	}
 
-	public void updateById(AdvertisementFormMap formMap) throws Exception {
+	public void updateById(BuildingApartmentFormMap formMap) throws Exception {
 		apartmentMapper.updateById(formMap);
 	}
 
 	public void add(BuildingApartmentFormMap formMap) throws Exception {
 		apartmentMapper.add(formMap);
+	}
+
+	public List<BuildingApartmentFormMap> findAll(BuildingApartmentFormMap formMap) {
+		return apartmentMapper.findAll(formMap);
 	}
 	
 

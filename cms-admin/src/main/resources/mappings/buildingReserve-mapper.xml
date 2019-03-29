@@ -45,6 +45,9 @@
 			<if test="appartment_name != null">
 				appartment_name,
 			</if>
+			<if test="apartment_address != null">
+				apartment_address,
+			</if>
 			<if test="reserve_time != null">
 				reserve_time,
 			</if>
@@ -53,6 +56,9 @@
 			</if>
 			<if test="client_phone != null">
 				client_phone,
+			</if>
+			<if test="openid != null">
+				openid,
 			</if>
 			<if test="remarks != null">
 				remarks,
@@ -86,6 +92,9 @@
 			<if test="appartment_name != null">
 				#{appartment_name,jdbcType=VARCHAR},
 			</if>
+			<if test="apartment_address != null">
+				#{apartment_address,jdbcType=VARCHAR},
+			</if>
 			<if test="reserve_time != null">
 				#{reserve_time,jdbcType=TIMESTAMP},
 			</if>
@@ -94,6 +103,9 @@
 			</if>
 			<if test="client_phone != null">
 				#{client_phone,jdbcType=VARCHAR},
+			</if>
+			<if test="openid != null">
+				#{openid,jdbcType=VARCHAR},
 			</if>
 			<if test="remarks != null">
 				#{remarks},

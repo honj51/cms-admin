@@ -78,7 +78,7 @@ $(function() {
 			index: 'renovation',
 			formatter: function(value, opt, rec) {
 				if(value==1){
-					return "毛坯方";
+					return "毛坯房";
 				}else if(value==2){
 					return "简装房";
 				}else if(value==3){
@@ -92,7 +92,7 @@ $(function() {
 			index: 'url',
 			formatter: function(value, opt, rec) {
 				if(value != null && value != '' && typeof(value) != 'undefined'){
-					return '<img src="'+value+ '"  style="width:50px;height:50px;" />';
+					return '<img src="'+value+ '"  style="width:50px;height:50px;" onclick=getUrl("'+ value +'") />';
 				}else{
 					return "";
 				}
@@ -104,7 +104,7 @@ $(function() {
 			index: 'url_one',
 			formatter: function(value, opt, rec) {
 				if(value != null && value != '' && typeof(value) != 'undefined'){
-					return '<img src="'+value+ '"  style="width:50px;height:50px;" />';
+					return '<img src="'+value+ '"  style="width:50px;height:50px;" onclick=getUrl("'+ value +'") />';
 				}else{
 					return "";
 				}
@@ -116,7 +116,7 @@ $(function() {
 			index: 'url_two',
 			formatter: function(value, opt, rec) {
 				if(value != null && value != '' && typeof(value) != 'undefined'){
-					return '<img src="'+value+ '"  style="width:50px;height:50px;" />';
+					return '<img src="'+value+ '"  style="width:50px;height:50px;" onclick=getUrl("'+ value +'") />';
 				}else{
 					return "";
 				}
@@ -128,7 +128,19 @@ $(function() {
 			index: 'url_three',
 			formatter: function(value, opt, rec) {
 				if(value != null && value != '' && typeof(value) != 'undefined'){
-					return '<img src="'+value+ '"  style="width:50px;height:50px;" />';
+					return '<img src="'+value+ '"  style="width:50px;height:50px;" onclick=getUrl("'+ value +'") />';
+				}else{
+					return "";
+				}
+			}
+		},
+		{
+			label: '360全景图',
+			name: 'panorama_url',
+			index: 'panorama_url',
+			formatter: function(value, opt, rec) {
+				if(value != null && value != '' && typeof(value) != 'undefined'){
+					return '<a href="javascript:void(0)" onclick=lookPanorama(\'' + value +'\')>点击查看全景图</a>';
 				}else{
 					return "";
 				}
@@ -149,7 +161,7 @@ $(function() {
 			name: 'opening_time',
 			index: 'opening_time',
 			formatter: function(cellValue, opt, rec) {
-				return new Date(cellValue).format("yyyy-MM-dd hh:mm:ss");
+				return new Date(cellValue).format("yyyy-MM-dd");
 			}
 		},
 		{
@@ -157,7 +169,7 @@ $(function() {
 			name: 'hand_time',
 			index: 'hand_time',
 			formatter: function(cellValue, opt, rec) {
-				return new Date(cellValue).format("yyyy-MM-dd hh:mm:ss");
+				return new Date(cellValue).format("yyyy-MM-dd");
 			}
 		},
 		{
@@ -355,7 +367,18 @@ function del() {
 
 }
 
-function getUrl(data,url){
-	console.log(url)
+function getUrl(url){
 	top.showImage(url);
+}
+
+function lookPanorama(url){
+	parent.layer.open({
+		title: "查看全景图",
+		type: 2,
+		area: ["90%", "90%"],
+		content: url,
+		end : function(){
+			$("#jqGrid").trigger('reloadGrid');
+	    }
+	});
 }

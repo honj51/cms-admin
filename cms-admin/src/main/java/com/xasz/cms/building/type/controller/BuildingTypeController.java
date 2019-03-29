@@ -5,12 +5,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,10 +22,8 @@ import com.xasz.cms.annotation.SystemLog;
 import com.xasz.cms.building.type.entity.BuildingTypeFormMap;
 import com.xasz.cms.building.type.service.BuildingTypeService;
 import com.xasz.cms.controller.index.BaseController;
-import com.xasz.cms.dept.entity.DeptFormMap;
 import com.xasz.cms.global.Constants;
 import com.xasz.cms.plugin.PageView;
-import com.xasz.cms.role.entity.RoleFormMap;
 import com.xasz.cms.service.IDService;
 import com.xasz.cms.user.entity.UserFormMap;
 import com.xasz.cms.util.Common;
@@ -137,7 +137,7 @@ public class BuildingTypeController extends BaseController {
 
 	@RequestMapping("editUI")
 	@SystemLog(module = "楼盘管理-户型类型管理", methods = "打开修改页面")
-	public String editUI(HttpServletRequest request,Model model) {
+	public String editUI(HttpServletRequest request, Model model) {
 		String id = request.getParameter("id");
 		model.addAttribute("formMap", typeService.findById(id));
 		return Common.BACKGROUND_PATH + "/building/type/edit";
@@ -230,6 +230,14 @@ public class BuildingTypeController extends BaseController {
 		}
 
 		return "success";
+	}
+
+	@ResponseBody
+	@GetMapping("findAll")
+	public List<BuildingTypeFormMap> findAll(HttpServletRequest request, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+
+		return typeService.findAll();
 	}
 
 }
