@@ -157,7 +157,7 @@ public class BuildingReserveController extends BaseController {
 
 		// 发送微信处理通知
 		String noticeUrl = "http://47.104.242.41:80/ns_weixin/sendTeml";
-		httpService.executPost(noticeUrl, id);
+		httpService.executPost(noticeUrl, "id=" + id + "&state=" + manageResult);
 
 		return "success";
 	}
@@ -173,20 +173,20 @@ public class BuildingReserveController extends BaseController {
 	public String addReserve(HttpServletRequest request, HttpServletResponse response) {
 		response.setHeader("Access-Control-Allow-Origin", "*");
 
-		String appartmentId = request.getParameter("apartmentId");
+		String apartmentId = request.getParameter("apartmentId");
 		String openid = request.getParameter("openid");
 		String reserveTime = request.getParameter("reserveTime");
 		String clientName = request.getParameter("clientName");
 		String clientPhone = request.getParameter("clientPhone");
 		String remarks = request.getParameter("remarks");
 
-		if (StringUtils.isBlank(appartmentId) || StringUtils.isBlank(reserveTime) || StringUtils.isBlank(clientName)
+		if (StringUtils.isBlank(apartmentId) || StringUtils.isBlank(reserveTime) || StringUtils.isBlank(clientName)
 				|| StringUtils.isBlank(clientPhone)) {
 			return "fail";
 		}
 
 		// 查询户型信息
-		BuildingApartmentFormMap apartmentFormMap = apartmentService.findById(appartmentId);
+		BuildingApartmentFormMap apartmentFormMap = apartmentService.findById(apartmentId);
 		if (null == apartmentFormMap) {
 			return "no_apartment";
 		}
@@ -195,8 +195,8 @@ public class BuildingReserveController extends BaseController {
 
 		BuildingReserveFormMap formMap = new BuildingReserveFormMap();
 		formMap.put("id", idService.getID());
-		formMap.put("appartment_id", appartmentId);
-		formMap.put("appartment_name", (String) apartmentFormMap.get("name"));
+		formMap.put("apartment_id", apartmentId);
+		formMap.put("apartment_name", (String) apartmentFormMap.get("name"));
 		formMap.put("apartment_address", (String) apartmentFormMap.get("address"));
 		formMap.put("openid", openid);
 		formMap.put("reserve_time", reserveTime);

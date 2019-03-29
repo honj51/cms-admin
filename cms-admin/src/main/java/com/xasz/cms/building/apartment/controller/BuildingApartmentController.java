@@ -654,12 +654,12 @@ public class BuildingApartmentController extends BaseController {
 
 		String price = request.getParameter("price");
 		String floor = request.getParameter("floor");
-		String renovation = request.getParameter("renovation");
+		String typeId = request.getParameter("typeId");
 
 		BuildingApartmentFormMap searchFormMap = new BuildingApartmentFormMap();
 		searchFormMap.put("price", price);
 		searchFormMap.put("floor", floor);
-		searchFormMap.put("renovation", renovation);
+		searchFormMap.put("typeId", typeId);
 		List<BuildingApartmentFormMap> formMaps = apartmentService.findAll(searchFormMap);
 
 		return formMaps;

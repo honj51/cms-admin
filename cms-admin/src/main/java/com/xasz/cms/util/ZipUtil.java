@@ -71,14 +71,13 @@ public class ZipUtil {
 					while ((len = bis.read(buff)) != -1) {
 						bos.write(buff, 0, len);
 					}
+					bos.close();
+					fos.close();
 				}
 			}
+			zipFile.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			bos.close();
-			fos.close();
-			zipFile.close();
 		}
 		if (isDelete) {
 			new File(zipFilePath).delete();
