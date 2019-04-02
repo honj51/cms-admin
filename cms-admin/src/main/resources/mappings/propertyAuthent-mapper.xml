@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasz.cms.property.authent.mapper.PropertyAuthentMapper">
+	
+	<select id="findByPage" resultType="com.xasz.cms.property.authent.entity.PropertyAuthentFormMap">
+		select
+			*
+		from
+			property_authent
+		where
+			1=1
+		<if test="name != null and name != ''">
+			and  name like concat ('%',#{name},'%')
+		</if>	
+		<if test="idcord != null and idcord != ''">
+			and  idcord like concat ('%',#{idcord},'%')
+		</if>	
+		<if test="state != null and state != ''">
+			and	state = #{state}
+		</if>	
+		<if test="orderbypart != null and orderbypart != ''">
+		    order by ${orderbypart}
+		</if>
+	</select>
+	
+	<insert id="add" parameterType="com.xasz.cms.property.authent.entity.PropertyAuthentFormMap">
+		insert into property_authent
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="idcord != null">
+				idcord,
+			</if>
+			<if test="id_url != null">
+				id_url,
+			</if>
+			<if test="id_urls != null">
+				id_urls,
+			</if>
+			<if test="openid != null">
+				openid,
+			</if>
+			<if test="time != null">
+				time,
+			</if>
+			<if test="create_user_id != null">
+				create_user_id,
+			</if>
+			<if test="create_user_name != null">
+				create_user_name,
+			</if>
+			<if test="create_time != null">
+				create_time,
+			</if>
+			<if test="update_user_id != null">
+				update_user_id,
+			</if>
+			<if test="update_user_name != null">
+				update_user_name,
+			</if>
+			<if test="update_time != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="idcord != null">
+				#{idcord,jdbcType=VARCHAR},
+			</if>
+			<if test="id_url != null">
+				#{id_url,jdbcType=VARCHAR},
+			</if>
+			<if test="id_urls != null">
+				#{id_urls,jdbcType=VARCHAR},
+			</if>
+			<if test="openid != null">
+				#{openid,jdbcType=VARCHAR},
+			</if>
+			<if test="time != null">
+				#{time,jdbcType=CHAR},
+			</if>
+			
+			<if test="create_user_id != null">
+				#{create_user_id,jdbcType=CHAR},
+			</if>
+			<if test="create_user_name != null">
+				#{create_user_name,jdbcType=VARCHAR},
+			</if>
+			<if test="create_time != null">
+				#{create_time,jdbcType=CHAR},
+			</if>
+			<if test="update_user_id != null">
+				#{update_user_id,jdbcType=CHAR},
+			</if>
+			<if test="update_user_name != null">
+				#{update_user_name,jdbcType=VARCHAR},
+			</if>
+			<if test="update_time != null">
+				#{update_time,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateById" parameterType="com.xasz.cms.property.authent.entity.PropertyAuthentFormMap">
+		update
+			property_authent
+		set
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="address != null">
+				address = #{address},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile},
+			</if>
+			<if test="idcord != null">
+				idcord = #{idcord},
+			</if>
+			<if test="id_url != null">
+				id_url = #{id_url},
+			</if>
+			<if test="id_urls != null">
+				id_urls = #{id_urls},
+			</if>
+			<if test="state != null">
+				state = #{state},
+			</if>
+			<if test="remarks != null">
+				remarks = #{remarks},
+			</if>
+			update_user_id = #{update_user_id},
+			update_user_name = #{update_user_name},
+			update_time = #{update_time}
+		where 
+			id = #{id} 
+	</update>
+	
+	<select id="findById" parameterType="string" resultType="com.xasz.cms.property.authent.entity.PropertyAuthentFormMap">
+		select
+			id,
+			name,
+			address,
+			mobile,
+			state,
+			idcord,
+			id_url,
+			id_urls,
+			remarks,
+			DATE_FORMAT(create_time, '%Y-%m-%d') AS create_time,
+			DATE_FORMAT(update_time, '%Y-%m-%d') AS update_time
+		from
+			property_authent
+		where
+			id = #{id}
+	</select>
+	<select id="getfindById" parameterType="string" resultType="com.xasz.cms.property.authent.entity.PropertyAuthentFormMap">
+		select
+			id,
+			name,
+			address,
+			mobile,
+			state,
+			idcord,
+			id_url,
+			id_urls,
+			remarks,
+			DATE_FORMAT(create_time, '%Y-%m-%d') AS create_time,
+			DATE_FORMAT(update_time, '%Y-%m-%d') AS update_time
+		from
+			property_authent
+		where
+			openid = #{openid} and state=2
+	</select>
+	<select id="getfindAllScee" parameterType="string" resultType="com.xasz.cms.property.authent.entity.PropertyAuthentFormMap">
+		select
+			id,
+			name,
+			address,
+			mobile,
+			state,
+			idcord,
+			id_url,
+			id_urls,
+			remarks,
+			DATE_FORMAT(create_time, '%Y-%m-%d') AS create_time,
+			DATE_FORMAT(update_time, '%Y-%m-%d') AS update_time
+		from
+			property_authent
+		where
+			openid = #{openid} and state=2
+	</select>
+	<select id="getfindAll" parameterType="string" resultType="com.xasz.cms.property.authent.entity.PropertyAuthentFormMap">
+		select
+			id,
+			name,
+			address,
+			mobile,
+			state,
+			idcord,
+			id_url,
+			id_urls,
+			remarks,
+			DATE_FORMAT(create_time, '%Y-%m-%d') AS create_time,
+			DATE_FORMAT(update_time, '%Y-%m-%d') AS update_time
+		from
+			property_authent
+		where
+			openid = #{openid}
+	</select>
+	
+	<select id="findAll" resultType="com.xasz.cms.property.authent.entity.PropertyAuthentFormMap">
+		select
+			id,
+			name,
+			address,
+			mobile,
+			state,
+			idcord,
+			id_url,
+			id_urls,
+			remarks,
+			DATE_FORMAT(create_time, '%Y-%m-%d') AS create_time,
+			DATE_FORMAT(update_time, '%Y-%m-%d') AS update_time
+		from
+			property_authent
+		where
+			1 = 1
+	</select>
+	
+</mapper>

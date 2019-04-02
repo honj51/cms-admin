@@ -4,7 +4,7 @@ $(document).ready(function() {
 	var websocket = null;
 	// 判断当前浏览器是否支持WebSocket
 	if ('WebSocket' in window) {
-		websocket = new WebSocket("ws://localhost:80/cms-admin/websocket/" + accountName);
+		websocket = new WebSocket("ws://localhost:8080/cms-admin/websocket/" + accountName);
 	} else {
 		layer.alert('当前浏览器不支持预定信息推送！', function(index){
 			layer.close(index);
@@ -32,6 +32,18 @@ $(document).ready(function() {
 				});
 			}else if(msg == "new_apartment_reserve"){
 				layer.alert('您有新的楼盘预约信息需要处理！', function(index){
+					layer.close(index);
+				});
+			}else if(msg == "new_pro_auth_reserve"){
+				layer.alert('您有新的业主认证信息需要处理！', function(index){
+					layer.close(index);
+				});
+			}else if(msg == "new_pro_guar_reserve"){
+				layer.alert('您有新的报修信息需要处理！', function(index){
+					layer.close(index);
+				});
+			}else if(msg == "new_pro_comol_reserve"){
+				layer.alert('您有新的投诉信息需要处理！', function(index){
 					layer.close(index);
 				});
 			}
