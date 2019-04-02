@@ -119,6 +119,57 @@ public class UeditorController extends BaseController {
 
 		return result;
 	}
+	
+	@RequestMapping("addNormalUI")
+	public String addNormalUI(HttpServletRequest request, Model model) {
+		return Common.BACKGROUND_PATH + "/ueditor/addNormal";
+	}
+	
+	@ResponseBody
+	@RequestMapping("addNormal")
+	public Map<String, Object> addNormal(HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+		Map<String, Object> result = new HashMap<String, Object>();
+
+		String webHtml = request.getParameter("html");
+
+		String path = "E:/apache-tomcat-7.0.68/webapps/upload/html/";
+		String fileName = idService.getID() + ".html";
+
+		StringBuilder sb = new StringBuilder();
+		PrintStream printStream = null;
+		try {
+			printStream = new PrintStream(new FileOutputStream(path + fileName),true,"utf-8");// 路径默认在项目根目录下
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		sb.append("<html>");
+		sb.append("<head>");
+		sb.append("<title></title>");
+		sb.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
+		sb.append("</head>");
+		sb.append("<body>");
+		sb.append(webHtml);
+		sb.append("</body>");
+		sb.append("</html>");
+
+		printStream.println(sb.toString());
+		printStream.close();
+
+		String url = webFileUrl + fileName;
+
+		result.put("url", url);
+		result.put("result", "success");
+
+		return result;
+	}
 
 	public static boolean createFile(String fileName, String filecontent) {
 		Boolean bool = false;
