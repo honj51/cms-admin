@@ -83,7 +83,7 @@ public class UeditorController extends BaseController {
 				"         font-size: 16px;\r\n" + 
 				"         color: chocolate;\r\n" + 
 				"         margin-top: 5%;\r\n" + 
-				"         margin-left: 22%;\r\n" + 
+				"         margin-left: 5%;\r\n" + 
 				"  }\r\n" + 
 				"  .pre:hover{\r\n" + 
 				"       color: rgb(100, 90, 83);\r\n" + 
