@@ -100,7 +100,7 @@ $(document).ready(function() {
 			title : "新增底部链接页面",
 			type : 2,
 			area : [ "90%", "90%" ],
-			content : rootPath + '/ueditor/addUI.shtml',
+			content : rootPath + '/ueditor/addNormalUI.shtml',
 			end : function() {
 				$("#jqGrid").trigger('reloadGrid');
 			}
