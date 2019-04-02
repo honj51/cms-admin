@@ -67,6 +67,7 @@
 			/websocket/** = anon
 			/ueditor/** = anon
 			/building/** = anon
+			/property/** = anon
 			</value>
 		</property>
 	</bean>
