@@ -20,18 +20,22 @@ public class AdvertisementService {
 	public List<AdvertisementFormMap> findByPage(AdvertisementFormMap formMap) {
 		return mapper.findByPage(formMap);
 	}
-	@Transactional(readOnly = true)
+
+	@Transactional(readOnly = false)
 	public void add(AdvertisementFormMap formMap) throws Exception {
 		mapper.add(formMap);
 	}
+
 	@Transactional(readOnly = false)
 	public void updateById(AdvertisementFormMap formMap) throws Exception {
 		mapper.updateById(formMap);
 	}
+
 	@Transactional(readOnly = true)
 	public AdvertisementFormMap findById(String id) {
 		return mapper.findById(id);
 	}
+
 	@Transactional(readOnly = true)
 	public List<AdvertisementFormMap> findAll(AdvertisementFormMap formMap) {
 		return mapper.findAll(formMap);
